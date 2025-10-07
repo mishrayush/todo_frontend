@@ -10,6 +10,17 @@
 !.yarn/releases
 !.yarn/versions
 
+
+package-lock.json
+vscode
+
+
+yarn.lock
+
+logs
+logs/
+
+
 # testing
 /coverage
 

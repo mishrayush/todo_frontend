@@ -1,115 +1,155 @@
-import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
+// import React, { useEffect, useState } from "react";
+// import axios from "axios";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+// const API = "http://localhost:5000/api/todos";
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// export default function App() {
+//   const [todos, setTodos] = useState([]);
+//   const [text, setText] = useState("");
+//   const [loading, setLoading] = useState(false);
+
+//   // Load todos
+//   useEffect(() => {
+//     setLoading(true);
+//     axios.get(API)
+//       .then(res => setTodos(res.data))
+//       .catch(console.error)
+//       .finally(() => setLoading(false));
+//   }, []);
+
+//   // Add todo
+//   const addTodo = async () => {
+//     if (!text.trim()) return;
+//     try {
+//       const res = await axios.post(API, { text: text.trim() });
+//       setTodos(prev => [res.data, ...prev]);
+//       setText("");
+//     } catch (err) {
+//       console.error(err);
+//     }
+//   };
+
+//   // Toggle completed
+//   const toggleTodo = async (id, currentCompleted) => {
+//     try {
+//       // Pass desired completed state to API (in case your backend expects it)
+//       const res = await axios.put(`${API}/${id}`, { completed: !currentCompleted });
+//       setTodos(todos.map(t => t._id === id ? res.data : t));
+//     } catch (err) {
+//       console.error(err);
+//     }
+//   };
+
+//   // Delete todo
+//   const deleteTodo = async (id) => {
+//     try {
+//       await axios.delete(`${API}/${id}`);
+//       setTodos(todos.filter(t => t._id !== id));
+//     } catch (err) {
+//       console.error(err);
+//     }
+//   };
+
+//   console.table(todos)
+
+//   return (
+//     <div className="min-h-screen bg-slate-50 flex items-start justify-center p-6">
+//       <div className="w-full max-w-2xl">
+//         <header className="mb-6">
+//           <h1 className="text-3xl font-semibold text-slate-800">Todo App</h1>
+//           <p className="text-sm text-slate-500 mt-1">Practice CRUD with a simple full-stack todo list.</p>
+//         </header>
+
+//         <main className="bg-white shadow-md rounded-lg p-6">
+//           {/* Input */}
+//           <div className="flex gap-3 items-center mb-6">
+//             <input
+//               type="text"
+//               placeholder="Add a new todo"
+//               value={text}
+//               onChange={e => setText(e.target.value)}
+//               onKeyDown={e => e.key === "Enter" && addTodo()}
+//               className="flex-1 px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-300"
+//             />
+//             <button
+//               onClick={addTodo}
+//               className="px-4 py-2 bg-sky-600 text-white rounded-md hover:bg-sky-700 active:scale-95 transition-transform"
+//             >
+//               Add
+//             </button>
+//           </div>
+
+//           {/* Todos list */}
+//           <section>
+//             {loading ? (
+//               <div className="text-center py-8 text-slate-500">Loading...</div>
+//             ) : todos.length === 0 ? (
+//               <div className="text-center py-8 text-slate-400">No todos yet — add one above ✨</div>
+//             ) : (
+//               <ul className="space-y-3">
+//                 {todos
+//                   .map(t => (
+//                     <li
+//                       key={t._id}
+//                       className="flex items-center justify-between gap-3 p-3 border border-slate-100 rounded-lg hover:shadow-sm"
+//                     >
+//                       <div className="flex items-center gap-3">
+//                         <button
+//                           onClick={() => toggleTodo(t._id, t.completed)}
+//                           className={`w-6 h-6 flex items-center justify-center rounded-md border ${t.completed ? "bg-sky-600 border-sky-600 text-white" : "border-slate-300"
+//                             }`}
+//                           aria-label="toggle complete"
+//                         >
+//                           {t.completed ? "✓" : ""}
+//                         </button>
+
+//                         <span
+//                           onClick={() => toggleTodo(t._id, t.completed)}
+//                           className={`select-none cursor-pointer ${t.completed ? "line-through text-slate-400" : "text-slate-800"
+//                             }`}
+//                         >
+//                           {t.text}
+//                         </span>
+//                       </div>
+
+//                       <div className="flex items-center gap-2">
+//                         {/* Edit placeholder (optional) */}
+//                         {/* <button className="text-sm text-sky-600">Edit</button> */}
+
+//                         <button
+//                           onClick={() => deleteTodo(t._id)}
+//                           className="text-sm text-red-600 hover:underline"
+//                         >
+//                           Delete
+//                         </button>
+//                       </div>
+//                     </li>
+//                   ))}
+//               </ul>
+//             )}
+//           </section>
+//         </main>
+
+//         <footer className="mt-4 text-xs text-slate-400 text-center">
+//           Tip: click the checkbox or the text to toggle completed.
+//         </footer>
+//       </div>
+//     </div>
+//   );
+// }
+
+
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function Home() {
-  return (
-    <div
-      className={`${geistSans.className} ${geistMono.className} font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20`}
-    >
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/pages/index.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+  const router = useRouter();
+
+  useEffect(() => {
+    // const token = localStorage.getItem("token");
+    const token = '32';
+    // router.replace(token ? "/dashboard" : "/login");
+  }, [router]);
+
+  return null;
 }
