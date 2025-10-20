@@ -27,10 +27,10 @@ export default function Dashboard() {
         },
         {
             id: 3,
-            name: "Notes App",
-            description: "Save important notes and ideas in one place.",
+            name: "Redux Flow(Redux tool kit)",
+            description: "How data flow in redux",
             icon: "🧠",
-            link: "/notes",
+            link: "/redux-visual",
             color: "bg-purple-500",
         },
         {

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
-const API = "https://todo-backend-ashy-alpha.vercel.app/api/todo";
+const API = "http://localhost:5000/api/todo";
 
 export default function Dashboard() {
     const router = useRouter();

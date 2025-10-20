@@ -5,7 +5,8 @@ export default function Navigation() {
 
   const navItems = [
      { name: "Dashboard", path: "/dashboard" },
-    { name: "Todos", path: "/todos" },
+    { name: "Todos", path: "/todos" }
+
     // { name: "Profile", path: "/profile" },
     // { name: "Settings", path: "/settings" },
   ];
