@@ -2,7 +2,7 @@
 import Navigation from "@/components/Navigation";
 import { useState } from "react";
 
-const API_URL = 'http://localhost:5000/api/todo/list'
+const API_URL = 'https://todo-backend-ashy-alpha.vercel.app/api/todo/list'
 export default function ApiDemo() {
     const [result, setResult] = useState(null);
     const [loading, setLoading] = useState(false);

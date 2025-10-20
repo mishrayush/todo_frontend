@@ -35,10 +35,18 @@ export default function Dashboard() {
         },
         {
             id: 4,
-            name: "Analytics Dashboard",
-            description: "View your performance and insights in real time.",
-            icon: "📊",
-            link: "/analytics",
+            name: "Static Site Generation(SSG)",
+            description: "SSG — generated at build time, and served instantly to all users without hitting any API at runtime.",
+            icon: "🧠",
+            link: "/ssg",
+            color: "bg-blue-500",
+        },
+        {
+            id: 5,
+            name: "Incremental Static Regeneration(IRS)",
+            description: "SSG but automatically re-generated in the background after a set time (revalidate) when new requests come in.",
+            icon: "🧠",
+            link: "/irs",
             color: "bg-orange-500",
         },
     ]);
