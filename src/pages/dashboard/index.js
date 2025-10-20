@@ -49,6 +49,14 @@ export default function Dashboard() {
             link: "/irs",
             color: "bg-orange-500",
         },
+        {
+            id: 5,
+            name: "Quote",
+            description: "Random Quote's",
+            icon: "🧠",
+            link: "/quote",
+            color: "bg-purple-500",
+        },
     ]);
 
     useEffect(() => {
