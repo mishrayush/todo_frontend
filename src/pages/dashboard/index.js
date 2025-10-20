@@ -54,7 +54,7 @@ export default function Dashboard() {
             name: "Quote",
             description: "Random Quote's",
             icon: "🧠",
-            link: "/quote",
+            link: "/quotes",
             color: "bg-purple-500",
         },
     ]);
